@@ -12,14 +12,17 @@ public class Game {
 	
     public Game() {
     	entites.add(new Turret("/turret.png",400,300,this));
-    	entites.add(new Turret("/turret.png",200,300,this));
+    }
+    
+    public void addEntity(Entity e) {
+    	entites.add(e);
     }
     
     double timer= 0;
     public void update(Engine engine)
     {
     	
-    	if(timer >= 30)
+    	if(timer >= 35)
     	{
     		timer = 0;
     		createEntity();
@@ -28,8 +31,12 @@ public class Game {
     	
     	
     	for(int i = 0; i < entites.size();i++) {
-    		if(entites.get(i).alive)
+    		if(entites.get(i).alive) {
     			entites.get(i).update(engine);
+    		}else {
+    			entites.remove(i);
+    			i--;
+    		}
     	}
     }
     
@@ -50,7 +57,7 @@ public class Game {
     	int x = 400 + (int)(Math.cos(angle) * (600));
     	int y = 300 + (int)(Math.sin(angle) * (500));
     	
-    	entites.add(new Enemy("/enemy.png",x,y));
+    	entites.add(new Enemy("/enemy.png",x,y,this));
     }
     
     

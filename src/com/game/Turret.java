@@ -12,10 +12,9 @@ import com.engine.Engine;
 public class Turret extends Entity{
 	private Image barrel;
 	private double ang = 35; 
-	private Game game;
 
 	public Turret(String path, int x, int y,Game game) {
-		super(path, x, y);
+		super(path, x, y,game);
 
 		try {
 			barrel = ImageIO.read(Image.class.getResourceAsStream("/barrell.png"));
@@ -30,13 +29,12 @@ public class Turret extends Entity{
 	@Override
 	public void update(Engine engine)
 	{
-		if(timer >= 60)
+		if(timer >= 30)
 		{
 			timer = 0;
 			for(int i = 0; i < game.entites.size();i++)
 			{
 				if(game.entites.get(i).tag == "enemy" && game.entites.get(i).alive) {
-					
 					Shoot(game.entites.get(i));
 					break;
 				}
@@ -47,8 +45,11 @@ public class Turret extends Entity{
 	
 	public void Shoot(Entity target)
 	{
+		Projectile p = new Projectile("/pix.png",(int)posX,(int)posY,game,target);
+		game.addEntity(p);
+		
 		ang = Math.atan2(posY - target.posY, posX - target.posX) + Math.PI;
-		target.kill();
+		//target.kill();
 	}
 	
 	@Override
@@ -60,6 +61,12 @@ public class Turret extends Entity{
 		g.rotate(ang,posX,posY);
 		g.drawImage(barrel, (int)posX - 24, (int)posY - 24, null);
 		g.setTransform(old);
+	}
+
+	@Override
+	public void collide(Entity other) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

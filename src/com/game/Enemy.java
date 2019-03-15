@@ -8,8 +8,8 @@ public class Enemy extends Entity{
 	public int health;
 	public int maxHealth;
 
-    public Enemy(String path,int x, int y) {
-    	super(path,x,y);
+    public Enemy(String path,int x, int y,Game game) {
+    	super(path,x,y, game);
     	tag = "enemy";
     }
     
@@ -27,4 +27,10 @@ public class Enemy extends Entity{
     	posX += Math.sin(angle);
     	posY -= Math.cos(angle);
     }
+
+	@Override
+	public void collide(Entity other) {
+		// TODO Auto-generated method stub
+		
+	}
 }
