@@ -11,6 +11,7 @@ public class Enemy extends Entity{
     public Enemy(String path,int x, int y,Game game) {
     	super(path,x,y, game);
     	tag = "enemy";
+    	aabb.active = true;
     }
     
     
@@ -30,7 +31,6 @@ public class Enemy extends Entity{
 
 	@Override
 	public void collide(Entity other) {
-		// TODO Auto-generated method stub
 		
 	}
 }

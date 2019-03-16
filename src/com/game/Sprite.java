@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.engine.AABB;
 import com.engine.Engine;
 import com.engine.Window;
 
@@ -16,6 +17,7 @@ public class Sprite {
 	public float posX;
 	public float posY;
 	public double angle;
+	public AABB aabb;
 	
 	private int width, height;
 	
@@ -30,6 +32,7 @@ public class Sprite {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		aabb = new AABB((int)posX,(int)posY,width,height);
 	}
 	
 	public float dist(float x1,float y1,float x2,float y2) {
@@ -51,5 +54,6 @@ public class Sprite {
 		g.drawImage(image, (int)posX - (width/2), (int)posY - (height/2), null);
 		g.setTransform(old);
 		}
+		aabb.update(posX, posY);
 	}
 }

@@ -10,6 +10,7 @@ public class Projectile extends Entity{
 		super(path, x, y,game);
 		tag = "projectile";
 		shootAt(e);
+		aabb.active = true;
 	}
 
 	@Override
@@ -17,10 +18,10 @@ public class Projectile extends Entity{
 		if(target.alive)
 		{
 			lookAt(target.posX,target.posY);
-			if(distance(posX,posY,target.posX,target.posY) < 3) {
+			/*if(distance(posX,posY,target.posX,target.posY) < 3) {
 				target.kill();
 				this.kill();
-			}
+			}*/
 		}
 		
 		posX += 5 * Math.sin(angle);
@@ -35,7 +36,11 @@ public class Projectile extends Entity{
 
 	@Override
 	public void collide(Entity other) {
-		// TODO Auto-generated method stub
+		if(other.tag == "enemy")
+		{
+			other.kill();
+			this.kill();
+		}
 		
 	}
 
